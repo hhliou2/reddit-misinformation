@@ -1,5 +1,4 @@
-twarc==1.11.0
-tweepy==3.9.0
+praw==7.1.0
 pandas==1.1.4
 numpy==1.18.5
 matplotlib==3.2.1

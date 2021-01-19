@@ -1,49 +1,39 @@
-import praw
 import pandas as pd
 import numpy as np
-import json
-
-# Load API
-def load_api(api_keys):
-    with open(api_keys) as f:
-        api_keys = json.load(f)
-    reddit = praw.Reddit(
-        client_id=api_keys['client_id'],
-        client_secret=api_keys['client_secret'],
-        password=api_keys['password'],
-        user_agent=api_keys['user_agent'],
-        username=api_keys['username']
-    )
-    
-    return reddit
-
-# Given a dataframe of post ID's, "rehydrate" with relevant information about the author, score, upvote ratio, and num comments
-def post_info(submissions):
-    submissions['author'] = submissions[0].apply(lambda x: x.author)
-    submissions['score'] = submissions[0].apply(lambda x: x.score)
-    submissions['upvote_ratio'] = submissions[0].apply(lambda x: x.upvote_ratio)
-    submissions['num_comments'] = submissions[0].apply(lambda x: x.num_comments)
-    return submissions
+from psaw import PushshiftAPI
+import datetime as dt
 
 # Write all post info to disk
-def write_data(infotype, infotype_path, api_keys):
-    # Get API
-    reddit = load_api(api_keys)
+def write_dehydrated_data(infotype, infotype_path, before_year, before_day, before_month):
     
-    # First subreddit in list - get 1000 top hot posts, rehydrate, and save to disk
-    temp = pd.DataFrame(list(reddit.subreddit(infotype[0]).hot(limit=1000)))
-    post_info(temp)
+    api = PushshiftAPI()
     
-    # Tell us which subreddit we uploaded
-    print(infotype[0])
+    # For each subreddit in list - get 1000 post ID's from before date and save to disk
+    start_epoch=dt.datetime(before_year, before_day, before_month).timestamp()
+    
+    # Keep track of whether to create or append
+    first = True
+    
+    for inf in infotype:
+        print(inf)
+        for i in range(10):
+            print(start_epoch)
+            gen = list(api.search_comments(before=int(start_epoch),
+                                        subreddit=inf,
+                                        filter=['id'], limit = 10000))
+            df = pd.DataFrame([thing.d_ for thing in gen])
+            df['subreddit'] = inf
 
-    # Save to either science.csv, myth.csv, or politics.csv
-    temp.to_csv(infotype_path)
-    
-    # Do for rest of files (appended this time)
-    for i in infotype[1:]:
-        temp = pd.DataFrame(list(reddit.subreddit(i).hot(limit=1000)))
-        post_info(temp)
-        print(i)
+            print(df.shape)
+            if len(df) == 0:
+                continue
+            # Save to either science.csv, myth.csv, or politics.csv
+            if first:
+                df.to_csv(infotype_path)
+                first = False
+            # Append to first df
+            else:
+                df.to_csv(infotype_path, mode = 'a', header = False)
 
-        temp.to_csv(infotype_path, mode = 'a', header = False)
+            # Start search from last date
+            start_epoch = df['created_utc'].iloc[-1]

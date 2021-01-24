@@ -3,6 +3,7 @@ import sys
 import json
 from src.data import data_download
 from src.features import calculate_stats
+from src.features import user_polarity
 
 
 # main operation
@@ -45,6 +46,20 @@ def main(targets):
         calculate_stats.sample(sample_size, science_path)
         calculate_stats.sample(sample_size, myth_path)
         calculate_stats.sample(sample_size, politics_path)
+        
+        
+    if 'user_polarity' in targets:
+        # Import configs
+        with open('config/user_polarity_params.json') as f:
+            path_params = json.load(f)
+        
+        # Load configs
+
+        science_path = path_params['science_path']
+        myth_path = path_params['myth_path']
+        politics_path = path_params['politics_path']
+        output_path = path_params['output_path']
+        user_polarity.calc_user_polarity(science_path, myth_path, politics_path, output_path)
         
 if __name__ == '__main__':
     args = sys.argv[1:]

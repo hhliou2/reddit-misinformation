@@ -20,7 +20,7 @@ def write_dehydrated_data(infotype, infotype_path, before_year, before_day, befo
             print(start_epoch)
             gen = list(api.search_comments(before=int(start_epoch),
                                         subreddit=inf,
-                                        filter=['id'], limit = 10000))
+                                        filter=['id', 'author'], limit = 10000))
             df = pd.DataFrame([thing.d_ for thing in gen])
             df['subreddit'] = inf
 

@@ -1,7 +1,8 @@
+import os
 import pandas as pd
 import numpy as np
 
-def calc_user_polarity(science_path, myth_path, politics_path, output_path): 
+def calc_user_polarity(science_path, myth_path, politics_path, output_path, output_file): 
     myth_df = pd.read_csv(myth_path)
     politics_df = pd.read_csv(politics_path)
     science_df = pd.read_csv(science_path)
@@ -19,4 +20,8 @@ def calc_user_polarity(science_path, myth_path, politics_path, output_path):
     user_polarity['science (%)'] = all_three['science (%)'] / all_three['total'] * 100
     user_polarity['politics (%)'] = all_three['politics (%)'] / all_three['total'] * 100
     user_polarity['myth (%)'] = all_three['myth (%)'] / all_three['total'] * 100
-    user_polarity.to_csv(output_path)
+    
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+        
+    user_polarity.to_csv(output_path + '/' + output_file)

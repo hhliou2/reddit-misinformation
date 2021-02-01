@@ -1,0 +1,8 @@
+{
+    "science_path": "test/data/science_test.csv",
+    "myth_path": "test/data/myth_test.csv",
+    "politics_path": "test/data/politics_test.csv",
+    "output_path": "test/output",
+    "output_file": "user_polarity.csv", 
+    "polarity_path": "test/output/user_polarity.csv"
+}

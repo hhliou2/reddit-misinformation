@@ -59,7 +59,6 @@ def main(targets):
             path_params = json.load(f)
         
         # Load configs
-
         science_path = path_params['science_path']
         myth_path = path_params['myth_path']
         politics_path = path_params['politics_path']
@@ -79,6 +78,24 @@ def main(targets):
         
         polarity_path = matrix_params['polarity_path']
         
+        users_by_sub = construct_matrices.users_by_subreddit(science_path, politics_path, myth_path)
+        shared_u = construct_matrices.shared_users(users_by_sub)
+        print(construct_matrices.count_matrix(shared_u))
+        print(construct_matrices.polarity_matrix(shared_u, polarity_path))
+        
+    if 'test' in targets: 
+        #Import configs
+        with open('test/test_params.json') as f:
+            path_params = json.load(f)
+        # Load configs
+        science_path = path_params['science_path']
+        myth_path = path_params['myth_path']
+        politics_path = path_params['politics_path']
+        output_path = path_params['output_path']
+        output_file = path_params['output_file']
+        polarity_path = path_params['polarity_path']
+        user_polarity.calc_user_polarity(science_path, myth_path, politics_path, output_path, output_file)
+    
         users_by_sub = construct_matrices.users_by_subreddit(science_path, politics_path, myth_path)
         shared_u = construct_matrices.shared_users(users_by_sub)
         print(construct_matrices.count_matrix(shared_u))

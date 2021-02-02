@@ -1,5 +1,6 @@
 /data/*
 *.zip
+*.pyc
 id.txt
 .twarc
 twarc.log

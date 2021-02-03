@@ -9,15 +9,16 @@ def write_data(infotype, infotype_path, before_year, before_day, before_month, a
     
     api = PushshiftAPI()
     
-    # For each subreddit in list - get 1000 post ID's from before date and save to disk
-    start_epoch=dt.datetime(before_year, before_month, before_day).timestamp()
-    end_epoch=dt.datetime(after_year, after_month, after_day).timestamp()
-    
     # Keep track of whether to create or append
     first = True
     
     for inf in infotype:
         print(inf)
+        
+        # For each subreddit in list - get 1000 post ID's from before date and save to disk
+        start_epoch=dt.datetime(before_year, before_month, before_day).timestamp()
+        end_epoch=dt.datetime(after_year, after_month, after_day).timestamp()
+        
         while start_epoch > end_epoch:
             gen = list(api.search_comments(before=int(start_epoch),
                                         subreddit=inf,

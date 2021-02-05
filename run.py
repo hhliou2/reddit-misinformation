@@ -2,7 +2,6 @@ import os
 import sys
 import json
 from src.data import data_download
-from src.features import calculate_stats
 from src.features import user_polarity
 from src.models import construct_matrices
 
@@ -35,23 +34,7 @@ def main(targets):
         
         data_download.write_data(science, science_path, before_year, before_day, before_month, after_year, after_day, after_month)
         data_download.write_data(myth, myth_path, before_year, before_day, before_month, after_year, after_day, after_month)
-        data_download.write_data(politics, politics_path, before_year, before_day, before_month, after_year, after_day, after_month)
-    
-    if 'stats' in targets:
-        with open('config/stat_params.json') as f:
-            stat_params = json.load(f)
-        
-        # Load configs
-        science_path = stat_params['science_path']
-        myth_path = stat_params['myth_path']
-        politics_path = stat_params['politics_path']
-        
-        sample_size = stat_params['sample_size']
-        
-        calculate_stats.sample(sample_size, science_path)
-        calculate_stats.sample(sample_size, myth_path)
-        calculate_stats.sample(sample_size, politics_path)
-        
+        data_download.write_data(politics, politics_path, before_year, before_day, before_month, after_year, after_day, after_month)        
         
     if 'user_polarity' in targets:
         # Import configs

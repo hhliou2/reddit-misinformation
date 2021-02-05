@@ -2,5 +2,8 @@
     "science_path": "data/raw/science.csv",
     "myth_path": "data/raw/myth.csv",
     "politics_path": "data/raw/politics.csv",
-    "polarity_path": "data/polarity/user_polarity.csv"
+    "polarity_path": "data/polarity/user_polarity.csv",
+    "matrix_path": "data/matrices",
+    "count_matrix_name": "count_matrix.json",
+    "polarity_matrix_name": "polarity_matrix.json"
 }

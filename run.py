@@ -4,6 +4,7 @@ import json
 from src.data import data_download
 from src.features import user_polarity
 from src.models import construct_matrices
+from src.visualization import plot_graphs
 
 
 # main operation
@@ -61,10 +62,31 @@ def main(targets):
         
         polarity_path = matrix_params['polarity_path']
         
+        matrix_path = matrix_params['matrix_path']
+        count_matrix_name = matrix_params['count_matrix_name']
+        polarity_matrix_name = matrix_params['polarity_matrix_name']
+        
         users_by_sub = construct_matrices.users_by_subreddit(science_path, politics_path, myth_path)
         shared_u = construct_matrices.shared_users(users_by_sub)
-        print(construct_matrices.count_matrix(shared_u))
-        print(construct_matrices.polarity_matrix(shared_u, polarity_path))
+        construct_matrices.count_matrix(shared_u, matrix_path, count_matrix_name)
+        construct_matrices.polarity_matrix(shared_u, polarity_path, matrix_path, polarity_matrix_name)
+    
+    if 'visualize' in targets:
+        #Import configs
+        with open('config/visualize_params.json') as f:
+            visualize_params = json.load(f)
+        
+        polarity_path = visualize_params['polarity_path']
+        count_matrix_path = visualize_params['count_matrix_path']
+        polarity_matrix_path = visualize_params['polarity_matrix_path']
+        
+        polarity_hist_path = visualize_params['polarity_hist_path']
+        count_chart_path = visualize_params['count_chart_path']
+        polarity_chart_path = visualize_params['polarity_chart_path']
+        
+        plot_graphs.polarity_histogram(polarity_path, polarity_hist_path)
+        plot_graphs.count_chart(count_matrix_path, count_chart_path)
+        plot_graphs.polarity_chart(polarity_matrix_path, polarity_chart_path)
         
     if 'test' in targets: 
         #Import configs

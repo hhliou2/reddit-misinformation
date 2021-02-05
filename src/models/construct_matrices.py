@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import json
 
 def users_by_subreddit(sci_path, poli_path, myth_path):
     paths = [sci_path, poli_path, myth_path]
@@ -19,13 +20,17 @@ def shared_users(users_by_sub):
             cross_counts[keys1 + ', ' + keys2] = pd.Series(list(set(values1).intersection(set(values2))))
     return cross_counts
 
-def count_matrix(shared_users):
+def count_matrix(shared_users, save_path, save_name):
     matrix_counts = dict()
     for keys, values in shared_users.items():
         matrix_counts[keys] = len(values)
-    return matrix_counts
+        
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    with open(save_path + '/' + save_name, 'w') as fp:
+        json.dump(matrix_counts, fp)
 
-def polarity_matrix(shared_users, polarity_path):
+def polarity_matrix(shared_users, polarity_path, save_path, save_name):
     matrix_polarities = dict()
     polarities = pd.read_csv(polarity_path)
     
@@ -36,4 +41,7 @@ def polarity_matrix(shared_users, polarity_path):
         avg_politics = df['politics (%)'].mean()
         matrix_polarities[keys] = [avg_science, avg_myth, avg_politics]
 
-    return matrix_polarities
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    with open(save_path + '/' + save_name, 'w') as fp:
+        json.dump(matrix_polarities, fp)

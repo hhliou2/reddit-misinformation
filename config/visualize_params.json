@@ -1,0 +1,8 @@
+{
+    "polarity_path": "data/polarity/user_polarity.csv",
+    "count_matrix_path": "data/matrices/count_matrix.json",
+    "polarity_matrix_path": "data/matrices/polarity_matrix.json",
+    "polarity_hist_path": "visualizations",
+    "count_chart_path": "visualizations/count_chart.png",
+    "polarity_chart_path": "visualizations/polarity_chart.png"
+}

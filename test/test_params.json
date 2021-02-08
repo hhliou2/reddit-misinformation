@@ -4,5 +4,11 @@
     "politics_path": "test/data/politics_test.csv",
     "output_path": "test/output",
     "output_file": "user_polarity.csv", 
-    "polarity_path": "test/output/user_polarity.csv"
+    "polarity_path": "test/output/user_polarity.csv",
+    "matrix_path": "test/output",
+    "count_matrix_name": "count_matrix.json",
+    "polarity_matrix_name": "polarity_matrix.json",
+    "polarity_hist_path": "test/visualizations",
+    "count_chart_path": "test/visualizations/count_chart.png",
+    "polarity_chart_path": "test/visualizations/polarity_chart.png"
 }

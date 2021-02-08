@@ -48,6 +48,7 @@ def main(targets):
         politics_path = path_params['politics_path']
         output_path = path_params['output_path']
         output_file = path_params['output_file']
+        
         user_polarity.calc_user_polarity(science_path, myth_path, politics_path, output_path, output_file)
     
     if 'matrices' in targets:
@@ -99,12 +100,23 @@ def main(targets):
         output_path = path_params['output_path']
         output_file = path_params['output_file']
         polarity_path = path_params['polarity_path']
+        matrix_path = path_params['matrix_path']
+        count_matrix_name = path_params['count_matrix_name']
+        polarity_matrix_name = path_params['polarity_matrix_name']
+        polarity_hist_path = path_params['polarity_hist_path']
+        count_chart_path = path_params['count_chart_path']
+        polarity_chart_path = path_params['polarity_chart_path']
+        
         user_polarity.calc_user_polarity(science_path, myth_path, politics_path, output_path, output_file)
     
         users_by_sub = construct_matrices.users_by_subreddit(science_path, politics_path, myth_path)
         shared_u = construct_matrices.shared_users(users_by_sub)
-        print(construct_matrices.count_matrix(shared_u))
-        print(construct_matrices.polarity_matrix(shared_u, polarity_path))
+        construct_matrices.count_matrix(shared_u, matrix_path, count_matrix_name)
+        construct_matrices.polarity_matrix(shared_u, polarity_path, matrix_path, polarity_matrix_name)
+        
+        plot_graphs.polarity_histogram(polarity_path, polarity_hist_path)
+        plot_graphs.count_chart(matrix_path + '/' + count_matrix_name, count_chart_path)
+        plot_graphs.polarity_chart(matrix_path + '/' + polarity_matrix_name, polarity_chart_path)
         
 if __name__ == '__main__':
     args = sys.argv[1:]

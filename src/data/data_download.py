@@ -20,11 +20,15 @@ def write_data(infotype, infotype_path, before_year, before_day, before_month, a
         end_epoch=dt.datetime(after_year, after_month, after_day).timestamp()
         
         while start_epoch > end_epoch:
-            gen = list(api.search_comments(before=int(start_epoch),
-                                        subreddit=inf,
-                                        filter=['id', 'author'], limit = 10000))
-            df = pd.DataFrame([thing.d_ for thing in gen])
-            df['subreddit'] = inf
+            try:
+                gen = list(api.search_comments(before=int(start_epoch),
+                                            subreddit=inf,
+                                            filter=['id', 'author'], limit = 10000))
+                df = pd.DataFrame([thing.d_ for thing in gen])
+                df['subreddit'] = inf
+            except Exception:
+                print('exception happened')
+                break
             
             if len(df) == 0:
                 break

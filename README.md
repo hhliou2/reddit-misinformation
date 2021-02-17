@@ -21,7 +21,7 @@ With the amount of actively spread misinformation circulating popular social med
 ### Building the project stages using `run.py`
 - To download the data, run `python run.py data`
 	- This downloads reddit comments from specified subreddits between a certain time period. The subreddits and time period are specified in `config/data_params.json`
-- To get user polarities, run `python run.py user_polarities`
+- To get user polarities, run `python run.py user_polarity`
 	- This generates a metric for all users collected in the data, getting filepaths from `config/user_polarity_params.json`
 - To generate common user matrices, run `python run.py matrices`
 	- This creates two matrices demonstrating, for every possible pair of subreddits, the number and average user polarity of the users in that subset. Filepaths are specified in `config/matrix_params.json`. NOTE: user_polarities should be run at least once before running `matrices`.

@@ -67,10 +67,14 @@ def main(targets):
         count_matrix_name = matrix_params['count_matrix_name']
         polarity_matrix_name = matrix_params['polarity_matrix_name']
         
+        science_order = matrix_params['science_order']
+        myth_order = matrix_params['myth_order']
+        politics_order = matrix_params['politics_order']
+        
         users_by_sub = construct_matrices.users_by_subreddit(science_path, politics_path, myth_path)
         shared_u = construct_matrices.shared_users(users_by_sub)
-        construct_matrices.count_matrix(shared_u, matrix_path, count_matrix_name)
-        construct_matrices.polarity_matrix(shared_u, polarity_path, matrix_path, polarity_matrix_name)
+        construct_matrices.count_matrix(shared_u, matrix_path, science_order, myth_order, politics_order, count_matrix_name)
+        construct_matrices.polarity_matrix(shared_u, polarity_path, matrix_path, science_order, myth_order, politics_order, polarity_matrix_name)
     
     if 'visualize' in targets:
         #Import configs

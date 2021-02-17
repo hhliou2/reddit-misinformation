@@ -8,7 +8,10 @@
     "matrix_path": "test/output",
     "count_matrix_name": "count_matrix.json",
     "polarity_matrix_name": "polarity_matrix.json",
+    "science_order": ["science", "CoronavirusRecession", "Health"],
+    "myth_order": ["bigfoot", "aliens"],
+    "politics_order": ["The_Donald", "DonaldTrump"],
     "polarity_hist_path": "test/visualizations",
     "count_chart_path": "test/visualizations/count_chart.png",
-    "polarity_chart_path": "test/visualizations/polarity_chart.png"
+    "polarity_chart_paths": ["test/visualizations/sci_polarity_chart.png", "test/visualizations/myth_polarity_chart.png", "test/visualizations/poli_polarity_chart.png"]
 }

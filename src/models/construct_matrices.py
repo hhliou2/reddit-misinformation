@@ -47,7 +47,13 @@ def polarity_matrix(shared_users, polarity_path, save_path, sci, myth, poli, sav
         avg_science = df['science (%)'].mean()
         avg_myth = df['myth (%)'].mean()
         avg_politics = df['politics (%)'].mean()
-        matrix_polarities[eval(keys)] = [avg_science, avg_myth, avg_politics]
+        
+        all_means = [avg_science, avg_myth, avg_politics]
+        
+        for i in range(3):
+            if pd.isnull(all_means[i]):
+                all_means[i] = 0
+        matrix_polarities[eval(keys)] = all_means
 
     ser = pd.Series(list(matrix_polarities.values()),
                     index = pd.MultiIndex.from_tuples(matrix_polarities.keys()))

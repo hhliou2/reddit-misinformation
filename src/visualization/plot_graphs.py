@@ -10,11 +10,25 @@ def polarity_histogram(polarity_path, save_path):
     
     df = pd.read_csv(polarity_path)
     categories = ['science (%)', 'myth (%)', 'politics (%)']
+    colors = ["lightsteelblue", "rosybrown", "plum"]
+    i = 0 
     for c in categories:
-        df[c].hist()
+        df[c].hist(color = colors[i])
+        i += 1
+        plt.ylim(0, 350_000)
+        plt.xlabel('Percentage of Intersection')
+        plt.ylabel('Frequency')
+        plt.title('User Polarity of ' + c[:-4].capitalize() + ' Subreddits')
+        
         plt.savefig(save_path + '/' + c + '.png', bbox_inches = 'tight')
         plt.clf()
-    
+    plt.hist([df[categories[0]], df[categories[1]], df[categories[2]]], label=['Science', 'Myth', 'Politics'], color = colors)
+    plt.legend(loc='upper right')
+    plt.xlabel('Percentage of Intersection')
+    plt.ylabel('Frequency')
+    plt.title('User Polarity of All Subreddits')
+    plt.savefig(save_path + '/all_polarity.png', bbox_inches = 'tight')
+    plt.clf()
 def count_chart(count_dict_path, save_path):
     plt.clf()
     
@@ -38,3 +52,18 @@ def polarity_chart(polarity_dict_path, save_paths):
         plot.savefig(save_paths[i], dpi=400)
         i += 1
         plt.clf()
+    #science-politics
+    total = sub_dfs[0] + sub_dfs[2]
+    new_weight = sub_dfs[2] / total
+    plot = sns.heatmap(new_weight, cmap="Reds")
+    plot.set_title('Science-Politics Overlap')
+    plot.collections[0].colorbar.set_label("Tendency to Political Misinformation")
+    plt.savefig(save_paths[3], dpi=400)
+    plt.clf()
+    #science-myth
+    total = sub_dfs[0] + sub_dfs[1]
+    new_weight = sub_dfs[1] / total
+    plot = sns.heatmap(new_weight, cmap="Reds")
+    plot.set_title('Science-Myth Overlap')
+    plot.collections[0].colorbar.set_label("Tendency to Myth Misinformation")
+    plt.savefig(save_paths[4], dpi=400)

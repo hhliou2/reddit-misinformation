@@ -33,7 +33,7 @@ def count_chart(count_dict_path, save_path):
     plt.clf()
     
     df = pd.read_csv(count_dict_path, index_col=0, header=0)
-    plot = sns.heatmap(df).get_figure()
+    plot = sns.heatmap(df, vmax=0.1).get_figure()
     plot.savefig(save_path, dpi=400)
 
 def polarity_chart(polarity_dict_path, save_paths):

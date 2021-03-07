@@ -9,6 +9,9 @@ from src.visualization import plot_graphs
 
 # main operation
 def main(targets):
+    if 'all' in targets:
+        targets = ['data', 'user_polarity', 'matrices', 'visualize']
+        
     if 'data' in targets:
         # Import configs
         with open('config/data_params.json') as f:

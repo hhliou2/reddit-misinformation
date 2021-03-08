@@ -13,7 +13,7 @@
     "politics_order": ["The_Donald", "DonaldTrump"],
     "polarity_hist_path": "test/visualizations",
     "count_chart_path": "test/visualizations/count_chart.png",
-    "polarity_chart_paths": ["test/visualizations/sci_polarity_chart.png", "test/visualizations/myth_polarity_chart.png", "test/visualizations/poli_polarity_chart.png"],
+    "polarity_chart_paths": ["visualizations/sci_polarity_chart.png", "visualizations/myth_polarity_chart.png", "visualizations/poli_polarity_chart.png", "visualizations/science-politics.png", "visualizations/science-myth.png"],
     "politics_colors": "['#041d2f', '#192e42', '#2d4156', '#41556b', '#566a81', '#6b7f97', '#8195ae', '#98acc5', '#afc3dd', '#c7dbf5', '#e0f4ff']",
     "science_colors": "['#260000', '#371618', '#4c2829', '#613b3b', '#774e4f', '#8d6363', '#a47878', '#bb8e8e', '#d3a5a5', '#ebbcbc', '#ffd5d5']",
     "myth_colors": "['#2a002e', '#410c44', '#552157', '#6a356c', '#7f4880', '#955d96', '#ab71ac', '#c287c2', '#d99dd9', '#f1b3f1', '#ffcfff']",

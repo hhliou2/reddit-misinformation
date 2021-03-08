@@ -21,6 +21,8 @@ With the amount of actively spread misinformation circulating popular social med
 ### Building the project stages using `run.py`
 - To download the data, run `python run.py data`
 	- This downloads reddit comments from specified subreddits between a certain time period. The subreddits and time period are specified in `config/data_params.json`
+- To create visualizations of EDA charts, run `python run.py eda`
+	- This creates bar charts representing the dataset we have collected. It also shows visualizes statitics of one-time posters and average number of posts in each category and subreddit.
 - To get user polarities, run `python run.py user_polarity`
 	- This generates a metric for all users collected in the data, getting filepaths from `config/user_polarity_params.json`
 - To generate common user matrices, run `python run.py matrices`

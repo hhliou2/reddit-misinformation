@@ -26,9 +26,11 @@ With the amount of actively spread misinformation circulating popular social med
 - To get user polarities, run `python run.py user_polarity`
 	- This generates a metric for all users collected in the data, getting filepaths from `config/user_polarity_params.json`
 - To generate common user matrices, run `python run.py matrices`
-	- This creates two matrices demonstrating, for every possible pair of subreddits, the number and average user polarity of the users in that subset. Filepaths are specified in `config/matrix_params.json`. NOTE: user_polarities should be run at least once before running `matrices`.
+	- This creates two matrices demonstrating, for every possible pair of subreddits, the number and average user polarity of the users in that subset. Filepaths are specified in `config/matrix_params.json`. 
+	- NOTE: user_polarities should be run at least once before running `matrices`.
 - To create visualizations of user polarities and matrices, run `python run.py visualize`
-	- This creates bar charts representing the general user polarity spread, as well as charts showing how users of different types cross into other subreddits. These bar charts will be replaced by heatmaps in a future update for easier visualization. Filepaths are specified in `config/visualize_params.json`. NOTE: `user_polarities` and `matrices` should be run at least once before running `visualize`.
+	- This creates bar charts representing the general user polarity spread, as well as charts showing how users of different types cross into other subreddits. These bar charts will be replaced by heatmaps in a future update for easier visualization. Filepaths are specified in `config/visualize_params.json`. 
+	- NOTE: `user_polarities` and `matrices` should be run at least once before running `visualize`.
 - To run the full pipeline, run `python run.py all`
 	- This will run all the targets. These targets include: `data`, `eda`, `user_polarity`, `matrices`, and `visualize`
 - To run the full pipeline on test data, run `python run.py test`

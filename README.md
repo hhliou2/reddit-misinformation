@@ -15,7 +15,7 @@ With the amount of actively spread misinformation circulating popular social med
 
 ## How to Run
 - Install the dependencies by running `pip install -r requirements.txt` from the root directory of the project.
-- Alternatively, you may reference our Docker image to recreate our environment, located [here].
+- Alternatively, you may reference our Docker image to recreate our environment, located [here](https://hub.docker.com/r/cindyhuynh/reddit-misinformation).
 - Due to the open source nature of the PushShift archive, there is no need for any API use or developer account. 
 
 ### Building the project stages using `run.py`

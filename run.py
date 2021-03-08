@@ -5,12 +5,12 @@ from src.data import data_download
 from src.features import user_polarity
 from src.models import construct_matrices
 from src.visualization import plot_graphs
-
+from src.visualization import plot_eda
 
 # main operation
 def main(targets):
     if 'all' in targets:
-        targets = ['data', 'user_polarity', 'matrices', 'visualize']
+        targets = ['data', 'user_polarity', 'matrices', 'visualize', 'eda']
         
     if 'data' in targets:
         # Import configs
@@ -96,6 +96,47 @@ def main(targets):
         plot_graphs.count_chart(count_matrix_path, count_chart_path)
         plot_graphs.polarity_chart(polarity_matrix_path, polarity_chart_paths)
         
+    if 'eda' in targets:
+        #Import configs for EDA visuals
+        with open('config/eda_params.json') as f:
+            data_params = json.load(f)
+
+        science_path = data_params['science_path']
+        myth_path = data_params['myth_path']
+        politics_path = data_params['politics_path']
+
+        politics_colors = data_params['politics_colors']
+        science_colors = data_params['science_colors']
+        myth_colors = data_params['myth_colors']
+
+        num_rows_out = data_params['num_rows_out']
+        politics_rows_out = data_params['politics_rows_out']
+        science_rows_out = data_params['science_rows_out']
+        myth_rows_out = data_params['myth_rows_out']
+
+        politics_onetime_out = data_params['politics_onetime_out']
+        science_onetime_out = data_params['science_onetime_out']
+        myth_onetime_out = data_params['myth_onetime_out']
+        onetime_posters_out = data_params['onetime_posters_out']
+
+        average_posts_out = data_params['average_posts_out']
+
+        # visualize dataset size
+        plot_eda.num_rows(myth_path, science_path, politics_path, num_rows_out)
+        plot_eda.category_rows(politics_path, politics_rows_out, politics_colors)
+        plot_eda.category_rows(science_path, science_rows_out, science_colors)
+        plot_eda.category_rows(myth_path, myth_rows_out, myth_colors)
+
+        # visualize one-time posters
+        plot_eda.onetime_posters(science_path, science_onetime_out, science_colors)
+        plot_eda.onetime_posters(myth_path, myth_onetime_out, myth_colors)
+        plot_eda.onetime_posters(politics_path, politics_onetime_out, politics_colors)
+        plot_eda.average_onetime_posters(science_path, politics_path, myth_path, onetime_posters_out)
+
+        # visualize average number of posts
+        plot_eda.average_posts(science_path, politics_path, myth_path, average_posts_out)
+
+
     if 'test' in targets: 
         #Import configs
         with open('test/test_params.json') as f:
@@ -131,3 +172,7 @@ def main(targets):
 if __name__ == '__main__':
     args = sys.argv[1:]
     main(args)
+
+
+# To do list:
+# - add eda to test 

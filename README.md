@@ -3,7 +3,7 @@
 Observing how different forms of misinformation and conspiracies are spread through social media.
 
 ## Overview
-With the amount of actively spread misinformation circulating popular social media platforms, our goal is to explore if various forms of misinformation follow varying patterns of diffusion. The scope of our project will be limited to two misinformation types -- myth and political misinformation, and focused on Reddit. Our data will be obtained from Reddit archive [pushshift.io](http://pushshift.io).
+With the amount of actively spread misinformation circulating popular social media platforms, our goal is to explore if various forms of misinformation follow varying patterns of diffusion. While misinformation exists on many platforms, the scope of our project will be limited to two misinformation types -- myth and political misinformation, and focused on Reddit. Our data will be obtained from Reddit archive [pushshift.io](http://pushshift.io).
 
 ## Contents
 - `src` contains the source code of our project, including algorithms for data extraction, analysis, and modelling.
